@@ -1,13 +1,13 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { App } from "./App.tsx";
+import React from "react"
+import ReactDOM from "react-dom/client"
+import { App } from "./App.tsx"
 
-const div = document.getElementById("root");
+const div = document.getElementById("root")
 
-const root = ReactDOM.createRoot(div!);
+const root = ReactDOM.createRoot(div!)
 
 root.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
-);
+  </React.StrictMode>,
+)
