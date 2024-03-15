@@ -31,6 +31,18 @@ export default {
 
 ## 锁版本
 
-```bash
-npm config set save-prefix=""
-```
+  ```bash
+    pnpm config set save-prefix=""
+  ```
+
+## 开发
+
+  ```bash
+    pnpm dev
+  ```
+
+## 部署
+  
+  ```bash
+  sh bin/deploy_to_gitpage.sh
+  ```
