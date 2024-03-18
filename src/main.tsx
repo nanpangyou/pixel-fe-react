@@ -1,17 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <div>Hello world!</div>
-  },
-  {
-    path: "/a",
-    element: <div>a</div>
-  }
-]);
+import { RouterProvider,  } from "react-router-dom";
+import { router } from "./routes/router";
 
 const div = document.getElementById("root");
 
