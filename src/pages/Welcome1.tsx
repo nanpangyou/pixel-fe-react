@@ -6,6 +6,7 @@ export const Welcome1: React.FC = () => {
     <div style={{ border: "1px solid red" }}>
       1
       <NavLink to="/welcome/2">下一页</NavLink>
+      <div className="text-3xl font-bold underline">xxx</div>
     </div>
   )
 }
