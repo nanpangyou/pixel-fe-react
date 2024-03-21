@@ -1,12 +1,11 @@
 import React from "react"
 import { NavLink } from "react-router-dom"
+import c from "classnames"
 
 export const Welcome1: React.FC = () => {
   return (
-    <div style={{ border: "1px solid red" }}>
-      1
-      <NavLink to="/welcome/2">下一页</NavLink>
-      <div className="text-3xl font-bold underline">xxx</div>
+    <div>
+      1ii
     </div>
   )
 }
