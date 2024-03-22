@@ -1,7 +1,6 @@
 import { animated, useTransition } from "@react-spring/web"
 import { type ReactNode, useRef, useState } from "react"
 import { Link, useLocation, useOutlet } from "react-router-dom"
-import c from "classnames"
 import logo from "../assets/icons/logo.svg"
 
 const routeMap: Record<string, string> = {
@@ -42,8 +41,8 @@ export const WelcomeLayout: React.FC = () => {
       </header>
       <main className="grow flex-shrink-[1] flex justify-center relative">
         {transitions((style, pathname) => (
-          <animated.div style={{ textAlign: "center", ...style, ...extraStyle }} className="h-full w-full p-[16px] mx-auto">
-            <div className="bg-white h-full rounded-2xl">
+          <animated.div style={{ ...style, ...extraStyle }} className="h-full w-full px-[45px] py-[24px] mx-auto">
+            <div className="h-full bg-white rounded-2xl">
               {map.current[pathname]}
             </div>
           </animated.div>
