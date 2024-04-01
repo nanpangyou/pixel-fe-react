@@ -1,6 +1,4 @@
-import React, { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-
+import React from "react"
 export const ErrorElement: React.FC = () => {
   // const nav = useNavigate()
   // useEffect(() => {

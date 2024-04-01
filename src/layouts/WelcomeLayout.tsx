@@ -8,7 +8,7 @@ const routeMap: Record<string, string> = {
   "/welcome/1": "/welcome/2",
   "/welcome/2": "/welcome/3",
   "/welcome/3": "/welcome/4",
-  "/welcome/4": "/welcome/xxx",
+  "/welcome/4": "/home",
 }
 
 export const WelcomeLayout: React.FC = () => {
@@ -43,6 +43,9 @@ export const WelcomeLayout: React.FC = () => {
     }
   }, [direction, location.pathname])
 
+  const handleSkip = () => {
+    localStorage.setItem("hasRead", "yes")
+  }
   return (
     <div className="flex flex-col bg-gradient-to-b from-[var(--welcome-background-color-top)] to-[var(--welcome-background-color-bottom)] h-screen">
       <header className="flex-shrink-0">
@@ -65,10 +68,12 @@ export const WelcomeLayout: React.FC = () => {
       </main>
       <footer className="flex-shrink-0 grid grid-cols-3 grid-rows-1 gap-x-0 gap-y-0 text-center text-2xl text-[#ffebcd] my-4">
         <div style={{ gridArea: "1 / 2 / 2 / 3" }}>
-          <Link to={routeMap[location.pathname]}>下一页</Link>
+          {location.pathname === "/welcome/4"
+            ? undefined
+            : <Link to={routeMap[location.pathname]}>下一页</Link>}
         </div>
         <span style={{ gridArea: "1 / 3 / 2 / 4" }}>
-          <Link to="/welcome/xxx">跳过</Link>
+          <Link to="/home" onClick={handleSkip}>跳过</Link>
         </span>
       </footer>
     </div>
