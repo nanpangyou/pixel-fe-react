@@ -3,6 +3,7 @@ import { type ReactNode, useEffect, useRef, useState } from "react"
 import { Link, useLocation, useNavigate, useOutlet } from "react-router-dom"
 import logo from "../assets/icons/logo.svg"
 import { useSwipe } from "../hooks/useSwipe"
+import { useLocalStore } from "../stores/useDemoStore"
 
 const routeMap: Record<string, string> = {
   "/welcome/1": "/welcome/2",
@@ -43,8 +44,9 @@ export const WelcomeLayout: React.FC = () => {
     }
   }, [direction, location.pathname])
 
+  const { setHasRead } = useLocalStore()
   const handleSkip = () => {
-    localStorage.setItem("hasRead", "yes")
+    setHasRead(true)
   }
   return (
     <div className="flex flex-col bg-gradient-to-b from-[var(--welcome-background-color-top)] to-[var(--welcome-background-color-bottom)] h-screen">
