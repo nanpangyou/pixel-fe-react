@@ -1,7 +1,8 @@
 import { animated, useTransition } from "@react-spring/web"
-import { type ReactNode, useRef, useState } from "react"
-import { Link, useLocation, useOutlet } from "react-router-dom"
+import { type ReactNode, useEffect, useRef, useState } from "react"
+import { Link, useLocation, useNavigate, useOutlet } from "react-router-dom"
 import logo from "../assets/icons/logo.svg"
+import { useSwipe } from "../hooks/useSwipe"
 
 const routeMap: Record<string, string> = {
   "/welcome/1": "/welcome/2",
@@ -14,7 +15,8 @@ export const WelcomeLayout: React.FC = () => {
   const location = useLocation()
   const outlet = useOutlet()
   const map = useRef<Record<string, ReactNode>>({})
-  const [extraStyle, setExtraStyle] = useState({})
+  const [extraStyle, setExtraStyle] = useState<{ position: "relative" | "absolute" }>({ position: "relative" })
+  const isAnimating = useRef(false)
   map.current[location.pathname] = outlet
   const transitions = useTransition(location.pathname, {
     from: { transform: location.pathname === "/welcome/1" ? "translateX(0%)" : "translateX(100%)" },
@@ -26,8 +28,21 @@ export const WelcomeLayout: React.FC = () => {
     },
     onRest: () => {
       setExtraStyle({ position: "relative" })
+      isAnimating.current = false
     },
   })
+  const nav = useNavigate()
+  const main = useRef<HTMLElement>(null)
+  const { direction } = useSwipe(main, { onTouchStart: e => e.preventDefault() })
+  useEffect(() => {
+    if (direction === "left") {
+      if (isAnimating.current)
+        return
+      isAnimating.current = true
+      nav(routeMap[location.pathname])
+    }
+  }, [direction, location.pathname])
+
   return (
     <div className="flex flex-col bg-gradient-to-b from-[var(--welcome-background-color-top)] to-[var(--welcome-background-color-bottom)] h-screen">
       <header className="flex-shrink-0">
@@ -39,7 +54,7 @@ export const WelcomeLayout: React.FC = () => {
           </h1>
         </div>
       </header>
-      <main className="grow flex-shrink-[1] flex justify-center relative">
+      <main className="grow flex-shrink-[1] flex justify-center relative" ref={main}>
         {transitions((style, pathname) => (
           <animated.div style={{ ...style, ...extraStyle }} className="h-full w-full px-[45px] py-[24px] mx-auto">
             <div className="h-full bg-white rounded-2xl">
